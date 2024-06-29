@@ -1,21 +1,30 @@
-const express = require("express");
-const fileUpload = require("express-fileupload");
-const pdfParse = require("pdf-parse");
+let fs = require('fs')
 
-const app = express();
+let pdf = require('pdf-parse')
 
-app.use("/", express.static("public"));
-app.use(fileUpload());
+async function extractTextFromPDF(pdfpath){
+    try {
+        
+        // Read the pdf file 
+        const databuffer = fs.readFileSync(pdfpath)
 
-app.post("/extract-text", (req, res) => {
-    if (!req.files && !req.files.pdfFile) {
-        res.status(400);
-        res.end();
+        // console.log(databuffer)
+
+        const data = await pdf(databuffer)
+
+        // Data in form of objects 
+        console.log(data)
+
+        const text = data.text ;
+
+        // Data in form of text
+        console.log(text)
+
+        fs.writeFileSync("file.txt",text,'utf-8')
+
+    } catch (error) {
+        console.log("Error fetching PDF---------> ",error)
     }
+}
 
-    pdfParse(req.files.pdfFile).then(result => {
-        res.send(result.text);
-    });
-});
-
-app.listen(3000);
+extractTextFromPDF("book.pdf")
