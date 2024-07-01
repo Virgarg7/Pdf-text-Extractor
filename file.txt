@@ -1,8 +1,8 @@
 
 
-AI under India AI Mission 
-Personalized Treatment Recommender System  
-A Full Stack Dev AI Project 
+   AI under India AI Mission 
+  Personalized Treatment Recommender System  
+ A Full Stack Dev AI Project 
  
 Bachelors in Technology 
 by  
